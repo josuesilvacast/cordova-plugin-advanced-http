@@ -57,9 +57,7 @@ public class CordovaHttpPlugin extends CordovaPlugin implements Observer {
         );
       }
 
-    } catch (Exception e) {
-      Log.e(TAG, "An error occured while loading system's CA certificates", e);
-    }
+    } catch (Exception e) {  }
   }
 
   @Override
