@@ -90,28 +90,23 @@ abstract class CordovaHttpBase implements Runnable {
       if (cause instanceof SSLException) {
         response.setStatus(-2);
         response.setErrorMessage("TLS connection could not be established: " + e.getMessage());
-        Log.w(TAG, "TLS connection could not be established", e);
       } else if (cause instanceof UnknownHostException) {
         response.setStatus(-3);
         response.setErrorMessage("Host could not be resolved: " + e.getMessage());
-        Log.w(TAG, "Host could not be resolved", e);
       } else if (cause instanceof SocketTimeoutException) {
         response.setStatus(-4);
         response.setErrorMessage("Request timed out: " + e.getMessage());
-        Log.w(TAG, "Request timed out", e);
       } else if (cause instanceof InterruptedIOException && "thread interrupted".equals(message.toLowerCase())) {
         this.setAborted(request, response);
       } else {
         response.setStatus(-1);
         response.setErrorMessage("There was an error with the request: " + message);
-        Log.w(TAG, "Generic request error", e);
       }
     } catch (InterruptedException ie) {
       this.setAborted(request, response);
     } catch (Exception e) {
       response.setStatus(-1);
       response.setErrorMessage(e.getMessage());
-      Log.e(TAG, "An unexpected error occured", e);
     }
 
     try {
@@ -121,7 +116,6 @@ abstract class CordovaHttpBase implements Runnable {
         this.callbackContext.success(response.toJSON());
       }
     } catch (JSONException e) {
-      Log.e(TAG, "An unexpected error occured while creating HTTP response object", e);
     }
   }
 
@@ -227,11 +221,8 @@ abstract class CordovaHttpBase implements Runnable {
     if (request != null) {
       try {
         request.disconnect();
-      } catch(Exception any){
-        Log.w(TAG, "Failed to close aborted request", any);
-      }
+      } catch(Exception any){  }
     }
 
-    Log.i(TAG, "Request was aborted");
   }
 }

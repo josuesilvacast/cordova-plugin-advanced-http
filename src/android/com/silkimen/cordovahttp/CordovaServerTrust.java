@@ -79,7 +79,6 @@ class CordovaServerTrust implements Runnable {
 
       callbackContext.success();
     } catch (Exception e) {
-      Log.e(TAG, "An error occured while configuring SSL cert mode", e);
       callbackContext.error("An error occured while configuring SSL cert mode");
     }
   }

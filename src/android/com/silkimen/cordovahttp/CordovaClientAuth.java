@@ -79,7 +79,6 @@ class CordovaClientAuth implements Runnable, KeyChainAliasCallback {
       this.tlsConfiguration.setKeyManagers(keyManagerFactory.getKeyManagers());
       this.callbackContext.success();
     } catch (Exception e) {
-      Log.e(TAG, "Couldn't load given PKCS12 container for authentication", e);
       this.callbackContext.error("Couldn't load given PKCS12 container for authentication");
     }
   }
@@ -104,8 +103,6 @@ class CordovaClientAuth implements Runnable, KeyChainAliasCallback {
 
       this.callbackContext.success(alias);
     } catch (Exception e) {
-      Log.e(TAG, "Couldn't load private key and certificate pair with given alias \"" + alias + "\" for authentication",
-          e);
       this.callbackContext.error(
           "Couldn't load private key and certificate pair with given alias \"" + alias + "\" for authentication");
     }
